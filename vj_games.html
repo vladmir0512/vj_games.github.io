@@ -1,0 +1,193 @@
+<html lang="ru"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VJ_Games✨</title>
+
+  <!-- Основное описание страницы -->
+  <title>Заголовок страницы</title>
+  <meta name="description" content="Краткое описание страницы, которое может отображаться в поисковиках и соцсетях.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mollimama.fun/">
+  <meta property="og:title" content="VJ_Games✨">
+  <meta property="og:description" content="Владимиииир (вовка)">
+  <meta property="og:image" content="https://mollimama.fun/mollimama.jpg">
+  <meta property="og:image:alt" content="VJ_Games✨">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://mollimama.fun/">
+  <meta property="twitter:title" content="VJ_Games✨">
+  <meta property="twitter:description" content="Владимиииир (вовка)">
+  <meta property="twitter:image" content="https://mollimama.fun/mollimama.jpg">
+
+  <style>
+    @font-face {
+        font-family: 'MyFont';
+        src: url('/font/UnifixSPDemo.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: MyFont, sans-serif;
+    }
+
+    #vid1 {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: cover;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.15;
+    }
+    #vid2 {
+      min-width: auto;
+      min-height: 100%;
+      object-fit: contain;
+      width: auto;
+      height: 100%;
+      object-fit: cover;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .sound-indicator {
+      position: fixed;
+      top: 20px;
+      margin: 0 auto;
+      /*right: 20px;*/
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 100;
+      transition: opacity 0.3s;
+    }
+
+    .sound-indicator.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .social-links {
+        padding: 20px 0;
+        text-align: center;
+        /*margin-top: auto;*/
+        width: 100%;
+        z-index: 50;
+
+        position: fixed;
+        top: 67.5%;
+    }
+
+    .social-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 18px;
+    }
+
+    .social-links a:hover {
+        text-decoration: underline;
+    }
+
+    h1 {
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        z-index: 50;
+        color: black;
+        display: inline-block;
+        top: 60%;
+        font-size: 3em;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color: #fff;">vj_games</h1>
+  <video autoplay="" muted="" loop="" id="vid2">
+    <source src="video.mp4" type="video/mp4">
+    Ваш браузер не поддерживает тег video.
+  </video>
+  <video autoplay="" muted="" loop="" id="vid1">
+    <source src="video.mp4" type="video/mp4">
+    Ваш браузер не поддерживает тег video.
+  </video>
+  
+  <div class="sound-indicator" id="soundIndicator">🔇 Нажмите для включения звука</div>
+
+  <div class="social-links">
+      <a href="https://www.twitch.tv/vj_games" target="_blank"><img src="twitch.png" height="32"></a>
+      <a href="https://www.tiktok.com/@vj_gamess" target="_blank"><img src="tiktok.png" height="32"></a>
+      <a href="https://t.me/+3ZXZvPaF9vA2NDhi" target="_blank"><img src="telegram.png" height="32"></a>
+      <a href="https://www.donationalerts.com/r/vj_games" target="_blank"><img src="da.svg" height="32"></a>
+  </div>
+
+  <script>
+    const video = document.querySelector('video');
+    const soundIndicator = document.getElementById('soundIndicator');
+    let soundEnabled = false;
+
+    // Функция для включения/выключения звука
+    function toggleSound() {
+      if (!soundEnabled) {
+        video.muted = false;
+        soundEnabled = true;
+        soundIndicator.textContent = '🔊 Звук включён';
+        
+        // Скрываем индикатор через 3 секунды
+        setTimeout(() => {
+          soundIndicator.classList.add('hidden');
+        }, 3000);
+      } else {
+        video.muted = true;
+        soundEnabled = false;
+        soundIndicator.textContent = '🔇 Нажмите для включения звука';
+        soundIndicator.classList.remove('hidden');
+      }
+    }
+
+    // Добавляем обработчики событий
+    document.body.addEventListener('click', toggleSound);
+    soundIndicator.addEventListener('click', toggleSound);
+
+    // Дополнительно: включаем звук при нажатии пробела
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleSound();
+      }
+    });
+
+    // Показываем индикатор звука при загрузке страницы
+    window.addEventListener('load', () => {
+      soundIndicator.classList.remove('hidden');
+    });
+  </script>
+
+</body></html>
